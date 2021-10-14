@@ -8,19 +8,19 @@ https://github.com/tayssirmlaiki/tay/blob/main/Akka-HTTP-server.scala
 
 -Code of "HttpRequest.scala" : 
 An HttpRequest consists of
-            a method (GET, POST, etc.)
-            a URI (see URI model for more information)
-            a seq of headers
-            an entity (body data)
+            a method (GET, POST, etc.),
+            a URI (see URI model for more information),
+            a seq of headers,
+            an entity (body data),
             a protocol
-            -All parameters of HttpRequest.apply have default values set, so headers for example don’t need to be specified if there are none. Many of the parameters types (like HttpEntity and Uri) define implicit conversions for common use cases to simplify the creation of request and response instances.
+All parameters of HttpRequest.apply have default values set, so headers for example don’t need to be specified if there are none. Many of the parameters types (like HttpEntity and Uri) define implicit conversions for common use cases to simplify the creation of request and response instances.
 https://github.com/tayssirmlaiki/tay/blob/main/HttpRequest.scala
 
 -Code of "HttpResponse.scala" :
 An HttpResponse consists of
-            a status code
-            a Seq of headers
-            an entity (body data)
+            a status code,
+            a Seq of headers,
+            an entity (body data),
             a protocol
 
 https://github.com/tayssirmlaiki/tay/blob/main/HttpResponse.scala
