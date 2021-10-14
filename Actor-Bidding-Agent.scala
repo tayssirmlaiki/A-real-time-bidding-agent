@@ -1,20 +1,14 @@
-package multithreading
-import akka.actor.ActorSystem
-import akka.actor.Actor
-import akka.actor.Props
+import akka.actor.typed.scaladsl.Behaviors
+import akka.actor.typed.scaladsl.LoggerOps
+import akka.actor.typed.{ ActorRef, ActorSystem, Behavior }
 
-object ActorBiddingAgent extends App{
-  class ActorAgent extends Actor{
-    def receive={
-      case s:String => println("The "+s)
-      case i:Int => println(" in "+i)
-    }
-    def foo = println("Normal Method")
+object ActorBiddingAgent {
+  final case class Bid(whom: String, replyTo: ActorRef[Bidding])
+  final case class Bidding(whom: String, from: ActorRef[Bid])
+
+  def apply(): Behavior[Bid] = Behaviors.receive { (context, message) =>
+    context.log.info("Bidding Agent {}!", message.whom)
+    message.replyTo ! Bidding(message.whom, context.self)
+    Behaviors.same
   }
-  val system =ActorSystem ("ActorAgent")
-  val actor = system.actorOf(Props[ActorAgent],"ActorAgent")
-  
-  actor! "Bidding Agent"
-  actor! 2021
-  system.terminate[]
 }
