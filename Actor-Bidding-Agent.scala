@@ -16,4 +16,5 @@ object ActorBiddingAgent extends App{
   
   actor! "Bidding Agent"
   actor! 2021
+  system.terminate[]
 }
