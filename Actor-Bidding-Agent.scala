@@ -2,13 +2,13 @@ import akka.actor.typed.scaladsl.Behaviors
 import akka.actor.typed.scaladsl.LoggerOps
 import akka.actor.typed.{ ActorRef, ActorSystem, Behavior }
 
-object ActorBiddingAgent {
-  final case class Bid(whom: String, replyTo: ActorRef[Bidding])
-  final case class Bidding(whom: String, from: ActorRef[Bid])
+object HelloBiddingAgent {
+  final case class Greet(whom: String, replyTo: ActorRef[Greeted])
+  final case class Greeted(whom: String, from: ActorRef[Greet])
 
-  def apply(): Behavior[Bid] = Behaviors.receive { (context, message) =>
-    context.log.info("Bidding Agent {}!", message.whom)
-    message.replyTo ! Bidding(message.whom, context.self)
+  def apply(): Behavior[Greet] = Behaviors.receive { (context, message) =>
+    context.log.info("Hello Bidding Agent {}!", message.whom)
+    message.replyTo ! Greeted(message.whom, context.self)
     Behaviors.same
   }
 }
