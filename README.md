@@ -16,4 +16,16 @@ An HttpRequest consists of
 -All parameters of HttpRequest.apply have default values set, so headers for example don’t need to be specified if there are none. Many of the parameters types (like HttpEntity and Uri) define implicit conversions for common use cases to simplify the creation of request and response instances.
 https://github.com/tayssirmlaiki/tay/blob/main/HttpRequest.scala
 
-3)
+Code of "HttpResponse.scala" :
+An HttpResponse consists of
+            a status code
+            a Seq of headers
+            an entity (body data)
+            a protocol
+
+https://github.com/tayssirmlaiki/tay/blob/main/HttpResponse.scala
+
+
+* We can modify The Targeting () case class by adding: 
+* case class Targeting( targetedSiteIds: Array[TargetedSiteId], targetedSiteName: String, NumberVue: Int)
+
