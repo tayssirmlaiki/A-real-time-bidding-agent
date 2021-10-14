@@ -6,4 +6,14 @@ https://github.com/tayssirmlaiki/tay/blob/main/Actor-Bidding-Agent.scala
 Now that we have a working server.
 https://github.com/tayssirmlaiki/tay/blob/main/Akka-HTTP-server.scala
 
+Code of "HttpRequest.scala" : 
+An HttpRequest consists of
+            a method (GET, POST, etc.)
+            a URI (see URI model for more information)
+            a seq of headers
+            an entity (body data)
+            a protocol
+-All parameters of HttpRequest.apply have default values set, so headers for example don’t need to be specified if there are none. Many of the parameters types (like HttpEntity and Uri) define implicit conversions for common use cases to simplify the creation of request and response instances.
+https://github.com/tayssirmlaiki/tay/blob/main/HttpRequest.scala
+
 3)
