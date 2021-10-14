@@ -1,33 +1,26 @@
-//simple GET requests:
-HttpRequest(uri = "https://...")
+import akka.http.scaladsl.model._
+import HttpMethods._
 
-// or:
-import akka.http.scaladsl.client.RequestBuilding.Get
-Get("https://...")
+// construct a simple GET request to `homeUri`
+val homeUri = Uri("/abc")
+HttpRequest(GET, uri = homeUri)
 
-// with query params
-Get("https://...")
+// construct simple GET request to "/index" (implicit string to Uri conversion)
+HttpRequest(GET, uri = "/index")
 
+// construct simple POST request containing entity
+val data = ByteString("abc")
+HttpRequest(POST, uri = "/receive", entity = data)
 
-
-//Or complicated POST requests:
+// customize every detail of HTTP request
+import HttpProtocols._
+import MediaTypes._
+import HttpCharsets._
+val userData = ByteString("abc")
+val authorization = headers.Authorization(BasicHttpCredentials("user", "pass"))
 HttpRequest(
-  method = HttpMethods.POST,
-  uri = "https://...",
-  entity = HttpEntity(ContentTypes.`text/plain(UTF-8)`, "data")
-)
-
-// or:
-import akka.http.scaladsl.client.RequestBuilding.Post
-Post("https://...", "data")
-
-
-//convert the response entity into an object:
-import akka.http.scaladsl.unmarshalling.Unmarshal
-import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-import spray.json.DefaultJsonProtocol._
-
-case class Pet(name: String)
-implicit val petFormat = jsonFormat1(Pet)
-
-val pet: Future[Pet] = Unmarshal(response).to[Pet]
+  PUT,
+  uri = "/user",
+  entity = HttpEntity(`text/plain` withCharset `UTF-8`, userData),
+  headers = List(authorization),
+  protocol = `HTTP/1.0`)
